@@ -1,9 +1,10 @@
 import React, { useContext, useMemo } from "react";
-import { StyleProp, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Card } from "react-native-paper";
 import { Restaurant } from "../../../../domain/types";
 import { Theme } from "../../../../application/types";
 import { ThemeContext } from "../../../context/ThemeContext";
+import Rating from "./Rating";
 
 type RestaurantInfoProps = {
   restaurant: Restaurant;
@@ -35,10 +36,12 @@ export default function RestaurantInfoCard({
         subtitleStyle={styles.subtitle}
       />
       <Card.Cover source={{ uri: photos[0] }} style={styles.cover} />
+      <Rating rating={rating} />
     </Card>
   );
 }
-
+//create empty iterable and map to svgs?
+//
 function createStyles(theme: Theme) {
   const styles = StyleSheet.create({
     card: {
