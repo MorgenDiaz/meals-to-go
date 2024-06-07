@@ -3,6 +3,7 @@ export type Restaurant = {
   icon: string;
   photos: string[];
   address: string;
+  isOpen: boolean;
   openingHours: string;
   rating: number;
   isClosedTemporarily: boolean;

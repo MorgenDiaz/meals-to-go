@@ -17,7 +17,7 @@ export default function Rating({ rating }: RatingProps) {
   const stars: React.JSX.Element[] = [];
 
   for (let i = 0; i < rating; i++) {
-    stars.push(<SvgXml xml={star} style={styles.star} />);
+    stars.push(<SvgXml key={`star-${i}`} xml={star} style={styles.star} />);
   }
 
   return <View style={styles.container}>{stars}</View>;
@@ -31,7 +31,6 @@ function createStyles(theme: Theme) {
     star: {
       width: theme.sizes[2],
       height: theme.sizes[2],
-      marginLeft: theme.space[3],
     },
   });
 
