@@ -33,10 +33,12 @@ export interface Fonts {
   monospace: string;
 }
 
+type FontWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+
 export interface FontWeights {
-  regular: number;
-  medium: number;
-  bold: number;
+  regular: FontWeight;
+  medium: FontWeight;
+  bold: FontWeight;
 }
 
 export interface FontSizes {
