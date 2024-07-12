@@ -1,10 +1,11 @@
 import React, { useContext, useMemo } from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { Card } from "react-native-paper";
 import { Restaurant } from "../../../../domain/types";
 import { Theme } from "../../../../application/types";
 import { ThemeContext } from "../../../context/ThemeContext";
 import { SvgXml } from "react-native-svg";
+import Text from "../../../components/typography/Text";
 import Rating from "./Rating";
 import open from "../../../../../assets/open";
 
@@ -31,20 +32,19 @@ export default function RestaurantInfoCard({
 
   return (
     <Card elevation={5} style={styles.card}>
-      <Card.Title
-        title={name}
-        subtitle={address}
-        titleVariant="titleLarge"
-        titleStyle={styles.title}
-        subtitleStyle={styles.subtitle}
-      />
       <Card.Cover source={{ uri: photos[0] }} style={styles.cover} />
+      <Text style={styles.title} variant="label">
+        {name}
+      </Text>
+      <Text style={styles.address} variant="caption">
+        {address}
+      </Text>
       <View style={styles.iconContainer}>
         <Rating rating={rating} />
 
         <View style={styles.detailsEnd}>
           {isClosedTemporarily ? (
-            <Text style={styles.closedText}>Closed Temporarily</Text>
+            <Text variant="error">Closed Temporarily</Text>
           ) : (
             isOpen && <SvgXml xml={open} style={styles.openIcon} />
           )}
@@ -62,9 +62,10 @@ function createStyles(theme: Theme) {
       backgroundColor: theme.colors.bg.primary,
     },
     title: {
-      fontFamily: theme.fonts.heading,
-      fontSize: theme.fontSizes.body,
-      color: theme.colors.ui.primary,
+      marginLeft: theme.space[3],
+    },
+    address: {
+      marginLeft: theme.space[3],
     },
     subtitle: {
       fontFamily: theme.fonts.body,
@@ -83,11 +84,6 @@ function createStyles(theme: Theme) {
     detailsEnd: {
       flexDirection: "row",
       gap: theme.space[2],
-    },
-    closedText: {
-      fontFamily: theme.fonts.body,
-      fontSize: theme.fontSizes.body,
-      color: theme.colors.text.error,
     },
     openIcon: {
       width: theme.sizes[2],

@@ -1,17 +1,18 @@
 import React from "react";
-import { Text as NativeText, StyleSheet, TextStyle } from "react-native";
+import { Text as NativeText, TextStyle } from "react-native";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { Theme } from "../../../application/types";
 
 type TextProps = {
   variant: "body" | "label" | "caption" | "error" | "hint";
+  style?: TextStyle;
   children: React.ReactNode;
 };
 
-export default function Text({ variant = "body", children }: TextProps) {
+export default function Text({ variant = "body", style, children }: TextProps) {
   const theme = useContext(ThemeContext);
-  const textStyles = variants[variant](theme);
+  const textStyles = { ...variants[variant](theme), ...style };
 
   return <NativeText style={textStyles}>{children}</NativeText>;
 }

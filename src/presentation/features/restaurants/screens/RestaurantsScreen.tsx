@@ -1,10 +1,62 @@
 import React, { useState, useContext, useMemo } from "react";
-import { StatusBar } from "react-native";
+import { FlatList, StatusBar } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 import RestaurantInfo from "../components/RestaurantInfoCardComponent";
 import { ThemeContext } from "../../../context/ThemeContext";
 import { Theme } from "../../../../application/types";
+import { Restaurant } from "../../../../domain/types";
+
+const restaurants: Restaurant[] = [
+  {
+    name: "Paniolo Grill",
+    icon: "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+    photos: [
+      "https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg?cs=srgb&dl=pexels-samerdaboul-2233729.jpg&fm=jpg",
+    ],
+    address: "4631 Lehua St",
+    isOpen: true,
+    openingHours: "4:30PM",
+    rating: 4,
+    isClosedTemporarily: false,
+  },
+  {
+    name: "Paniolo Grill 2",
+    icon: "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+    photos: [
+      "https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg?cs=srgb&dl=pexels-samerdaboul-2233729.jpg&fm=jpg",
+    ],
+    address: "4631 Lehua St",
+    isOpen: true,
+    openingHours: "4:30PM",
+    rating: 4,
+    isClosedTemporarily: false,
+  },
+  {
+    name: "Paniolo Grill 3",
+    icon: "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+    photos: [
+      "https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg?cs=srgb&dl=pexels-samerdaboul-2233729.jpg&fm=jpg",
+    ],
+    address: "4631 Lehua St",
+    isOpen: true,
+    openingHours: "4:30PM",
+    rating: 4,
+    isClosedTemporarily: false,
+  },
+  {
+    name: "Paniolo Grill 4",
+    icon: "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+    photos: [
+      "https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg?cs=srgb&dl=pexels-samerdaboul-2233729.jpg&fm=jpg",
+    ],
+    address: "4631 Lehua St",
+    isOpen: true,
+    openingHours: "4:30PM",
+    rating: 4,
+    isClosedTemporarily: false,
+  },
+];
 
 export default function RestaurantsScreen() {
   const theme = useContext(ThemeContext);
@@ -22,22 +74,13 @@ export default function RestaurantsScreen() {
           elevation={5}
         />
       </View>
-      <View style={styles.listContainer}>
-        <RestaurantInfo
-          restaurant={{
-            name: "Paniolo Grill",
-            icon: "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
-            photos: [
-              "https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg?cs=srgb&dl=pexels-samerdaboul-2233729.jpg&fm=jpg",
-            ],
-            address: "4631 Lehua St",
-            isOpen: true,
-            openingHours: "4:30PM",
-            rating: 4,
-            isClosedTemporarily: false,
-          }}
-        />
-      </View>
+      <FlatList
+        style={styles.listContainer}
+        data={restaurants}
+        renderItem={({ item }) => <RestaurantInfo restaurant={item} />}
+        contentContainerStyle={styles.restaurantContainer}
+        keyExtractor={(item) => item.name}
+      />
     </SafeAreaView>
   );
 }
@@ -57,6 +100,9 @@ function createStyles(theme: Theme) {
       flex: 1,
       backgroundColor: theme.colors.bg.primary,
       padding: theme.space[3],
+    },
+    restaurantContainer: {
+      rowGap: theme.space[3],
     },
   });
 
